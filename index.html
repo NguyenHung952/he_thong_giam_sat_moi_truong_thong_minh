@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Smart Environment Monitoring System</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Smart Environment Monitoring System</h1>
+
+    <p>
+      Hệ thống giám sát môi trường thông minh sử dụng ESP32 + MQTT + Flask/FastAPI + Dashboard Web.
+      Mô phỏng dự án thực tế dành cho thực tập Embedded, IoT, Firmware và Web IoT.
+    </p>
+
+    <div class="hero">
+      <div class="hero-box">
+        <h3>Thiết bị</h3>
+        <p>ESP32, Relay, Sensor Gas, DHT22, Soil Sensor, Smart Meter</p>
+      </div>
+
+      <div class="hero-box">
+        <h3>Backend</h3>
+        <p>Python Flask/FastAPI, MQTT Broker, REST API, WebSocket</p>
+      </div>
+
+      <div class="hero-box">
+        <h3>Cloud</h3>
+        <p>ThingSpeak, InfluxDB, Grafana, Cloud IoT Analytics</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="container">
+    <div class="card">
+      <h2>Dashboard Cảm Biến Thời Gian Thực</h2>
+
+      <div class="sensor-grid">
+        <div class="sensor-box">
+          <h3>Nhiệt Độ</h3>
+          <div id="temperature" class="sensor-value">28°C</div>
+        </div>
+
+        <div class="sensor-box">
+          <h3>Độ Ẩm</h3>
+          <div id="humidity" class="sensor-value">60%</div>
+        </div>
+
+        <div class="sensor-box">
+          <h3>Độ Ẩm Đất</h3>
+          <div id="soil" class="sensor-value">70%</div>
+        </div>
+
+        <div class="sensor-box">
+          <h3>Gas</h3>
+          <div id="gas" class="sensor-value">SAFE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Biểu Đồ IoT Realtime</h2>
+      <canvas id="sensorChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Điều Khiển Smart Home</h2>
+
+      <div class="relay-grid">
+        <div class="relay-item">
+          <h3>Đèn Phòng Khách</h3>
+          <button onclick="toggleDevice(this)">BẬT / TẮT</button>
+          <div class="status offline">OFF</div>
+        </div>
+
+        <div class="relay-item">
+          <h3>Máy Bơm Nước</h3>
+          <button onclick="toggleDevice(this)">BẬT / TẮT</button>
+          <div class="status offline">OFF</div>
+        </div>
+
+        <div class="relay-item">
+          <h3>Quạt Thông Minh</h3>
+          <button onclick="toggleDevice(this)">BẬT / TẮT</button>
+          <div class="status offline">OFF</div>
+        </div>
+
+        <div class="relay-item">
+          <h3>LED ESP32</h3>
+          <button onclick="toggleDevice(this)">BẬT / TẮT</button>
+          <div class="status offline">OFF</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>MQTT Chat Giữa Thiết Bị</h2>
+
+      <div class="chat-box" id="chatBox">
+        <div class="message">ESP32 #1: Xin chào MQTT</div>
+        <div class="message">ESP32 #2: Kết nối thành công</div>
+      </div>
+
+      <input
+        type="text"
+        id="chatInput"
+        placeholder="Nhập tin nhắn MQTT..."
+      />
+
+      <button onclick="sendMessage()">Gửi MQTT</button>
+    </div>
+
+    <div class="card">
+      <h2>Giám Sát Điện Năng</h2>
+
+      <div class="sensor-grid">
+        <div class="sensor-box">
+          <h3>Công Suất</h3>
+          <div id="power" class="sensor-value">450W</div>
+        </div>
+
+        <div class="sensor-box">
+          <h3>Điện Áp</h3>
+          <div id="voltage" class="sensor-value">220V</div>
+        </div>
+      </div>
+
+      <canvas id="powerChart"></canvas>
+    </div>
+
+    <div class="card digital-twin">
+      <h2>Digital Twin IoT</h2>
+
+      <div class="iot-device"></div>
+
+      <p>
+        Digital Twin mô phỏng trạng thái thiết bị ESP32 thời gian thực.
+        Có thể mở rộng AI Edge Computing, dự đoán lỗi phần cứng và tối ưu điện năng.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Kiến Trúc Hệ Thống</h2>
+
+      <div class="architecture">
+        <p>ESP32 → MQTT Broker → FastAPI/Flask → Database → Dashboard</p>
+        <p>ESP32 → ThingSpeak → Cloud Analytics</p>
+        <p>ESP32 → InfluxDB → Grafana Monitoring</p>
+        <p>Web Dashboard → REST API → Điều khiển Relay</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Công Nghệ Sử Dụng</h2>
+
+      <div>
+        <span class="tag">ESP32</span>
+        <span class="tag">MQTT</span>
+        <span class="tag">Flask</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Python</span>
+        <span class="tag">InfluxDB</span>
+        <span class="tag">Grafana</span>
+        <span class="tag">ThingSpeak</span>
+        <span class="tag">Edge AI</span>
+        <span class="tag">Cloud IoT</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Mở Rộng Khóa Luận</h2>
+
+      <ul class="feature-list">
+        <li>AI dự đoán điện năng tiêu thụ</li>
+        <li>Machine Learning phân tích môi trường</li>
+        <li>Edge AI chạy trực tiếp trên ESP32</li>
+        <li>Realtime Monitoring bằng Grafana</li>
+        <li>Cloud IoT với AWS/Azure</li>
+        <li>OTA Firmware Update</li>
+        <li>Bảo mật MQTT TLS/SSL</li>
+        <li>Hệ thống cảnh báo thông minh Telegram</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Smart Environment Monitoring System © 2026 | Embedded + IoT + Dashboard Project
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
